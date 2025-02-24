@@ -7,12 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.foodapp.activity.MealActivity
+import com.example.foodapp.adapters.CategoryAdapter
 import com.example.foodapp.adapters.MostPopularAdapter
 import com.example.foodapp.databinding.FragmentHomeBinding
-import com.example.foodapp.pojo.CategoryMeals
+import com.example.foodapp.pojo.MealsByCategory
 import com.example.foodapp.pojo.Meal
 import com.example.foodapp.viewModel.HomeViewModel
 
@@ -22,6 +24,7 @@ class HomeFragment : Fragment() {
     private lateinit var mHomeViewModel: HomeViewModel
     private lateinit var mRandomMeal : Meal
     private lateinit var mPopularItemsAdapter : MostPopularAdapter
+    private lateinit var  mCategoryAdapter : CategoryAdapter
 
     companion object{
         const val MEAL_ID = "meal_id"
@@ -33,6 +36,7 @@ class HomeFragment : Fragment() {
         super.onCreate(savedInstanceState)
         mHomeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
         mPopularItemsAdapter = MostPopularAdapter()
+        mCategoryAdapter = CategoryAdapter()
     }
 
     override fun onCreateView(
@@ -55,6 +59,11 @@ class HomeFragment : Fragment() {
         getPopularItems()
         observePopularItems()
         popularItemsClick()
+
+        prepareCategoryItemRecyclerView()
+        getCategory()
+        observeCategoryItems()
+
     }
 
     private fun popularItemsClick() {
@@ -100,8 +109,25 @@ class HomeFragment : Fragment() {
     private fun observePopularItems() {
         mHomeViewModel.observePopularItemsLiveData().observe( viewLifecycleOwner) { mealList ->
 
-            mPopularItemsAdapter.setMeals( mealList as ArrayList<CategoryMeals> )
+            mPopularItemsAdapter.setMeals( mealList as ArrayList<MealsByCategory> )
 
+        }
+    }
+
+    private fun prepareCategoryItemRecyclerView() {
+        mBinding.recyclerViewCategory.apply {
+            layoutManager = GridLayoutManager( context, 3, GridLayoutManager.VERTICAL, false )
+            adapter = mCategoryAdapter
+        }
+    }
+
+    private fun getCategory() {
+        mHomeViewModel.getCategories()
+    }
+
+    private fun observeCategoryItems() {
+        mHomeViewModel.observeCategoryListLiveData().observe( viewLifecycleOwner){ categories ->
+            mCategoryAdapter.setCategoryList( categories as ArrayList )
         }
     }
 }
