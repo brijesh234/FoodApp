@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.backend.wasm.ir2wasm.bind
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -36,6 +38,7 @@ android {
     }
     buildFeatures {
         compose = true
+        viewBinding = true
     }
 }
 
@@ -53,8 +56,15 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    // navigation
     implementation(libs.androidx.navigation.fragment )
     implementation(libs.androidx.navigation.ui )
+    //retrofit
+    implementation(libs.androidx.retrofit)
+    implementation(libs.retrofit.gson)
+    //glide
+    implementation(libs.glide)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

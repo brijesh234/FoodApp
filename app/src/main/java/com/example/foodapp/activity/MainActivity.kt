@@ -1,4 +1,4 @@
-package com.example.foodapp
+package com.example.foodapp.activity
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -7,6 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
+import com.example.foodapp.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -20,8 +21,8 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val bottomNavigation = findViewById<BottomNavigationView>( R.id.bottomNavigation )
-        val navController = Navigation.findNavController( this, R.id.hostFragment )
+        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        val navController = Navigation.findNavController( this, R.id.hostFragment)
 
         NavigationUI.setupWithNavController( bottomNavigation, navController )
     }

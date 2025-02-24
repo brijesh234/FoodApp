@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".HomeFragment">
+    tools:context=".fragment.HomeFragment">
     
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -65,7 +65,9 @@
                 <ImageView
                     android:id="@+id/card_view_image"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"/>
+
             </androidx.cardview.widget.CardView>
 
             <TextView
