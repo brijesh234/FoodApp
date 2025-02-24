@@ -55,7 +55,6 @@ class HomeViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<CategoryList>, t: Throwable) {
-                TODO("Not yet implemented")
                 Log.d("MyTag","failed")
             }
 
