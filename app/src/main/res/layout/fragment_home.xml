@@ -60,6 +60,8 @@
                 android:layout_marginStart="@dimen/card_view_start_margin"
                 android:layout_marginEnd="@dimen/card_view_start_margin"
                 android:layout_marginTop="@dimen/card_view_top_margin"
+                app:cardCornerRadius="@dimen/card_view_top_margin"
+                app:cardBackgroundColor="@color/purple_200"
                 android:layout_marginBottom="@dimen/card_view_top_margin">
 
                 <ImageView
@@ -85,7 +87,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/recycler_view_height"
-                android:id="@+id/recyclerView"
+                android:id="@+id/recyclerViewMealsPopular"
                 android:layout_marginStart="@dimen/card_view_start_margin"
                 android:layout_marginEnd="@dimen/recycler_view_margin_end"
                 app:layout_constraintStart_toStartOf="parent"
@@ -100,7 +102,7 @@
                 android:textSize="@dimen/generic_sub_heading_text_size"
                 android:text="@string/home_sub_heading_3"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerViewMealsPopular"
                 app:layout_constraintStart_toStartOf="@+id/linear_layout"
                 app:layout_constraintEnd_toEndOf="@+id/linear_layout"/>
 
@@ -111,6 +113,7 @@
                 app:layout_constraintStart_toStartOf="@+id/linear_layout"
                 app:layout_constraintEnd_toEndOf="@+id/linear_layout"
                 app:layout_constraintTop_toBottomOf="@+id/sub_heading_3"
+                app:cardCornerRadius="@dimen/card_view_top_margin"
                 android:layout_marginStart="@dimen/card_view_start_margin"
                 android:layout_marginEnd="@dimen/card_view_start_margin"
                 android:layout_marginTop="@dimen/card_view_top_margin"

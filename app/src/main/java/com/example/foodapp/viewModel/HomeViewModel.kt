@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.foodapp.pojo.CategoryList
+import com.example.foodapp.pojo.CategoryMeals
 import com.example.foodapp.pojo.Meal
 import com.example.foodapp.pojo.MealList
 import com.example.foodapp.retrofit.RetrofitInstance
@@ -12,7 +14,8 @@ import retrofit2.Response
 
 class HomeViewModel : ViewModel() {
 
-    private var randomMealLivedata = MutableLiveData<Meal>()
+    private var mRandomMealLivedata = MutableLiveData<Meal>()
+    private var mPopularItemsLiveData = MutableLiveData< List<CategoryMeals> >()
 
     fun getRandomMeal() {
         RetrofitInstance.api.getRandomMeal().enqueue( object : retrofit2.Callback<MealList> {
@@ -20,7 +23,7 @@ class HomeViewModel : ViewModel() {
                 if (response.isSuccessful && response.body() != null )
                 {
                     val meal : Meal = response.body()!!.meals.get(0)
-                    randomMealLivedata.value = meal
+                    mRandomMealLivedata.value = meal
                     Log.d( "MyTag", "onResponse: ${meal.idMeal}")
                 }
                 else
@@ -38,6 +41,28 @@ class HomeViewModel : ViewModel() {
     }
 
     fun observeRandomMealLivedata() : LiveData<Meal> {
-        return randomMealLivedata
+        return mRandomMealLivedata
+    }
+
+    fun getPopularItems( ) {
+        RetrofitInstance.api.getPopularItems( "seafood" ).enqueue( object : retrofit2.Callback<CategoryList> {
+            override fun onResponse(call: Call<CategoryList>, response: Response<CategoryList>) {
+                if (response.body() != null )
+                {
+                    Log.d("MyTag","success")
+                    mPopularItemsLiveData.value = response.body()!!.meals
+                }
+            }
+
+            override fun onFailure(call: Call<CategoryList>, t: Throwable) {
+                TODO("Not yet implemented")
+                Log.d("MyTag","failed")
+            }
+
+        })
+    }
+
+    fun observePopularItemsLiveData() : LiveData<List<CategoryMeals>> {
+        return mPopularItemsLiveData
     }
 }
