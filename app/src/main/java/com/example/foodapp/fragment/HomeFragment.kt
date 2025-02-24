@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.foodapp.activity.CategoryMealsActivity
 import com.example.foodapp.activity.MealActivity
 import com.example.foodapp.adapters.CategoryAdapter
 import com.example.foodapp.adapters.MostPopularAdapter
@@ -30,6 +31,7 @@ class HomeFragment : Fragment() {
         const val MEAL_ID = "meal_id"
         const val MEAL_NAME = "meal_name"
         const val MEAL_THUMB = "meal_thumb"
+        const val CATEGORY_NAME = "category_name"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,6 +65,7 @@ class HomeFragment : Fragment() {
         prepareCategoryItemRecyclerView()
         getCategory()
         observeCategoryItems()
+        categoryItemsClick()
 
     }
 
@@ -128,6 +131,14 @@ class HomeFragment : Fragment() {
     private fun observeCategoryItems() {
         mHomeViewModel.observeCategoryListLiveData().observe( viewLifecycleOwner){ categories ->
             mCategoryAdapter.setCategoryList( categories as ArrayList )
+        }
+    }
+
+    private fun categoryItemsClick() {
+        mCategoryAdapter.onClick = { category ->
+            val intent =  Intent( activity, CategoryMealsActivity::class.java )
+            intent.putExtra( CATEGORY_NAME, category.strCategory )
+            startActivity( intent )
         }
     }
 }

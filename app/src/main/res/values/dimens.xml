@@ -15,4 +15,7 @@
     <dimen name="youtube_40dp">40dp</dimen>
     <dimen name="card_view_180_dp">180dp</dimen>
     <dimen name="card_view_90_dp">90dp</dimen>
+    <dimen name="card_view_160_dp">160dp</dimen>
+    <dimen name="image_height_170_dp">170dp</dimen>
+    <dimen name="text_size">15sp</dimen>
 </resources>

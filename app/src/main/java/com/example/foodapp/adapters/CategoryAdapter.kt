@@ -10,6 +10,7 @@ import com.example.foodapp.pojo.Category
 class CategoryAdapter : RecyclerView.Adapter< CategoryAdapter.CategoryViewHolder>() {
 
     private var mCategoryList = ArrayList<Category>()
+    lateinit var onClick : ((Category ) -> Unit)
 
     fun setCategoryList( categories : ArrayList<Category> ) {
         mCategoryList = categories
@@ -23,6 +24,9 @@ class CategoryAdapter : RecyclerView.Adapter< CategoryAdapter.CategoryViewHolder
             .load( mCategoryList[position].strCategoryThumb)
             .into( holder.binding.categoryImageView)
         holder.binding.categoryTextView.text = mCategoryList[position].strCategory
+        holder.binding.categoryImageView.setOnClickListener{
+            onClick.invoke( mCategoryList[position])
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
