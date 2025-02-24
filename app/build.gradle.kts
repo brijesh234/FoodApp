@@ -64,6 +64,10 @@ dependencies {
     implementation(libs.retrofit.gson)
     //glide
     implementation(libs.glide)
+    //viewModel MVVM
+    implementation(libs.viewmodel.ktx)
+    implementation(libs.livedata.ktx)
+    implementation(libs.lifecycle.runtime.ktx)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
