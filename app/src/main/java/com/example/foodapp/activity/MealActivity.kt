@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -15,8 +16,11 @@ import com.bumptech.glide.Glide
 import com.example.foodapp.R
 import com.example.foodapp.databinding.ActivityMealBinding
 import com.example.foodapp.databinding.FragmentHomeBinding
+import com.example.foodapp.db.MealDatabase
 import com.example.foodapp.fragment.HomeFragment
+import com.example.foodapp.pojo.Meal
 import com.example.foodapp.viewModel.MealViewModel
+import com.example.foodapp.viewModel.MealViewModelFactory
 
 class MealActivity : AppCompatActivity() {
 
@@ -31,13 +35,29 @@ class MealActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = ActivityMealBinding.inflate( layoutInflater )
         setContentView( mBinding.root )
-        mMealViewModel = ViewModelProvider.create( this )[ MealViewModel::class.java]
+//        mMealViewModel = ViewModelProvider.create( this )[ MealViewModel::class.java]
+
+        val mealDatabase = MealDatabase.getInstance( this )
+        val viewModelFactory = MealViewModelFactory( mealDatabase )
+        mMealViewModel = ViewModelProvider( this, viewModelFactory)[MealViewModel::class .java]
+
         getMealFromIntent()
         onLoadingCase()
         mMealViewModel.getMealDetails( mMealId )
         observeMealDetails()
         setInformationInView()
         setClinkEventOnYouTube()
+        onFavoriteClick()
+
+    }
+
+    private fun onFavoriteClick() {
+        mBinding.favoriteButton.setOnClickListener{
+            mealToSave?.let{
+                mMealViewModel.upsert( it )
+                Toast.makeText(this, "Meal Save", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun setClinkEventOnYouTube() {
@@ -47,12 +67,15 @@ class MealActivity : AppCompatActivity() {
         }
     }
 
+    private var mealToSave : Meal?= null
+
     private fun observeMealDetails() {
         mMealViewModel.observerMealDetailsLivedata().observe( this ){
             mBinding.category.text = "${getString( R.string.category)} : ${it.strCategory}"
             mBinding.location.text = "${getString( R.string.area)} : ${it.strArea}"
             mBinding.details.text = it.strInstructions
             mMealYoutubeLink = it.strYoutube!!
+            mealToSave = it
             onResponse()
         }
     }
