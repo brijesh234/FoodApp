@@ -52,7 +52,7 @@ class MealActivity : AppCompatActivity() {
             mBinding.category.text = "${getString( R.string.category)} : ${it.strCategory}"
             mBinding.location.text = "${getString( R.string.area)} : ${it.strArea}"
             mBinding.details.text = it.strInstructions
-            mMealYoutubeLink = it.strYoutube
+            mMealYoutubeLink = it.strYoutube!!
             onResponse()
         }
     }
