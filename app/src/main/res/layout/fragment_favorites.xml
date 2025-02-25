@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.FavoritesFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.FavoritesFragment"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/card_view_top_margin">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Favorites" />
+        android:layout_height="wrap_content"
+        android:id="@+id/category_heading"
+        android:textColor="@color/purple_200"
+        android:textAlignment="center"
+        android:padding="@dimen/margin_5_dp"
+        android:textSize="@dimen/generic_sub_heading_text_size"/>
 
-</FrameLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/card_view_top_margin"
+        android:id="@+id/favoritesRecyclerView"/>
+
+</LinearLayout>

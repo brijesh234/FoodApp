@@ -43,12 +43,6 @@ class MealViewModel( val mealDatabase: MealDatabase ) : ViewModel() {
         }
     }
 
-    fun delete( meal: Meal ) {
-        viewModelScope.launch {
-            mealDatabase.mealDao().delete( meal )
-        }
-    }
-
     fun insertMeal() {
         TODO("Not yet implemented")
     }
