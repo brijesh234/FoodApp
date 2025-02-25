@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="@dimen/card_view_top_margin"
     tools:context=".fragment.HomeFragment">
     
     <androidx.core.widget.NestedScrollView
@@ -35,6 +36,7 @@
                     android:layout_weight="2"
                     android:textSize="@dimen/text_header_size"/>
                 <ImageView
+                    android:id="@+id/search_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:src="@drawable/baseline_search_24"/>

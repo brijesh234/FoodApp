@@ -9,5 +9,6 @@
     <string name="home_sub_heading_2">over popular items</string>
     <string name="home_sub_heading_3">Categories</string>
     <string name="instructions">Instructions</string>
+    <string name="hint_search">Search Meal...</string>
 
 </resources>

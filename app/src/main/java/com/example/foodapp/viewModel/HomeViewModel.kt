@@ -15,6 +15,7 @@ import com.example.foodapp.pojo.MealList
 import com.example.foodapp.retrofit.RetrofitInstance
 import kotlinx.coroutines.launch
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 
 class HomeViewModel( val mealDatabase: MealDatabase ) : ViewModel() {
@@ -23,6 +24,7 @@ class HomeViewModel( val mealDatabase: MealDatabase ) : ViewModel() {
     private var mPopularItemsLiveData = MutableLiveData< List<MealsByCategory> >()
     private var mCategoryListLiveData = MutableLiveData<List<Category>>()
     private var mFavoritesMealsLiveData = mealDatabase.mealDao().getAllMeal()
+    private var mSearchMeals = MutableLiveData<List<Meal>>()
 
     fun getRandomMeal() {
         RetrofitInstance.api.getRandomMeal().enqueue( object : retrofit2.Callback<MealList> {
@@ -99,5 +101,23 @@ class HomeViewModel( val mealDatabase: MealDatabase ) : ViewModel() {
         viewModelScope.launch {
             mealDatabase.mealDao().delete( meal )
         }
+    }
+
+    fun getSearchMeals( query : String ) = RetrofitInstance.api.getSearchMeal( query ).enqueue( object : Callback<MealList> {
+        override fun onResponse(call: Call<MealList>, response: Response<MealList>) {
+           val mealsList = response.body()?.meals
+            mealsList.let {
+                mSearchMeals.postValue( it )
+            }
+        }
+
+        override fun onFailure(call: Call<MealList>, t: Throwable) {
+            Log.d("MyTag","Failed")
+        }
+
+    } )
+
+    fun observeSearchMealsLiveData() : LiveData<List<Meal>> {
+        return mSearchMeals
     }
 }
