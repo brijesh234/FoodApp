@@ -1,26 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".fragment.FavoritesFragment">
+
+<!-- TODO: Update blank fragment layout -->
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/favoritesRecyclerView"
+    android:layout_margin="@dimen/card_view_start_margin"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.FavoritesFragment"
-    android:orientation="vertical"
-    android:layout_margin="@dimen/card_view_top_margin">
+    android:layout_height="match_parent"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/category_heading"
-        android:textColor="@color/purple_200"
-        android:textAlignment="center"
-        android:padding="@dimen/margin_5_dp"
-        android:textSize="@dimen/generic_sub_heading_text_size"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/card_view_top_margin"
-        android:id="@+id/favoritesRecyclerView"/>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
